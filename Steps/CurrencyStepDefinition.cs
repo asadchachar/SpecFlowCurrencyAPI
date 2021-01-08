@@ -2,97 +2,103 @@
 using RestSharp;
 using SpecFlowCurrencyAPI.Config;
 using SpecFlowCurrencyAPI.Model;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace NUnitTestProject1.Steps
+namespace SpecFlowCurrencyAPI.Steps
 {
     [Binding]
     public sealed class CurrencyStepDefinition
     {
         private RestClient RestClient;
-        private List<IRestResponse> Responses;
-        private List<CurrencyRequest> Requests;
-        private IEnumerable TableData;
+        private IRestResponse Response;
+        private CurrencyRequest CurrencyRequest;
 
-        [Given(@"API Initialization for fixer Currency Conversion API")]
+        /*
+         * API Initialization
+         */
+        [Given(@"I have Initialized API Service call for fixer Currency Conversion API")]
         public void GivenIHaveFixerAPI()
         {
-            Responses = new List<IRestResponse>();
-            Requests = new List<CurrencyRequest>();
-
             RestClient = new RestClient(APIConfig.BaseUrl);
             RestClient.AddDefaultHeader("api-key", APIConfig.ApiKey);
         }
-
-        [Given(@"I have following data")]
-        public void GivenIHaveFollowingData(Table table)
+        [Given(@"API Initialization without api key for fixer Currency Conversion API")]
+        public void GivenAPIInitializationWithoutApiKeyForFixerCurrencyConversionAPI()
         {
-            TableData = table.CreateSet<CurrencyRequest>();
-        }
-
-        [When(@"Currency Conversion API is Invoked")]
-        public void WhenAPIIsInvoked()
-        {
-            RestRequest restRequest = new RestRequest("/convert", Method.GET);
-
-            foreach(CurrencyRequest req in TableData ) {
-                RestClient.AddDefaultQueryParameter("from", req.from);
-                RestClient.AddDefaultQueryParameter("to", req.to);
-                RestClient.AddDefaultQueryParameter("amount", req.amount.ToString());
-                Responses.Add(RestClient.Execute(restRequest));
-            }
-
-        }
-
-        [Then(@"the response code should be (.*)")]
-        public void ThenTheResponseCodeShouldBe(int p0)
-        {
-            foreach(IRestResponse response in Responses)
-            {
-                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-                Assert.That(response.ContentType, Is.EqualTo("application/json"));
-                Assert.That(response.Content.Contains("success"));
-                Assert.That(response.Content.Contains("true"));
-                Assert.That(response.Content.Contains("convertResult"));
-                Assert.That(response.Content.Contains("rate"));
-            }
+            RestClient = new RestClient(APIConfig.BaseUrl);
+            //Note that this time we are skipping api key for authorization 
         }
 
         /*
-         * POST Request for currency Conversion
+         * Request paramter Initializations 
          */
-        [Given(@"I have following data for POST Request")]
+        [Given(@"I wnat to current following currencies and amount")]
         public void GivenIHaveFollowingDataForPOST(Table table)
         {
-            TableData = table.CreateSet<CurrencyRequest>();
-            foreach(CurrencyRequest req in TableData)
+            IEnumerable data = table.CreateSet<CurrencyRequest>();
+
+            foreach(CurrencyRequest c in data)
             {
-                Requests.Add(new CurrencyRequest { from = req.from, to = req.to, amount = req.amount });
+                CurrencyRequest = new CurrencyRequest { from = c.from, to = c.to, amount = c.amount };
+                break;
             }
 
         }
 
-        [When(@"POST API is invoked")]
-        public void WhenPOSTAPIIsInvoked()
+        [Given(@"I want to convert (.*) (.*) to (.*)")]
+        public void GivenIWantToConvertTo(Decimal amount, string fromCurrency, string toCurrency)
         {
-            foreach (CurrencyRequest req in Requests)
-            {
-                RestRequest request = new RestRequest("/convert/currency", Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                request.AddJsonBody(req);
-
-                Responses.Add(RestClient.Execute(request));
-            }
+            RestClient.AddDefaultQueryParameter("from", fromCurrency);
+            RestClient.AddDefaultQueryParameter("to", toCurrency);
+            RestClient.AddDefaultQueryParameter("amount", amount.ToString());
 
         }
-        [Given(@"I have this data for POST Request (.*), (.*) and (.*)")]
-        public void GivenIHaveThusDataForPOSTRequestAnd(string from, string to, double amount)
+
+        [Given(@"I want to convert (.*) (.*) (.*)")]
+        public void GivenIWantToConvert(double Amount, string FromCurrency, string ToCurrency)
         {
-            Requests.Add(new CurrencyRequest { from = from, to = to, amount = amount });
+            CurrencyRequest = new CurrencyRequest { amount = Amount, from = FromCurrency, to = ToCurrency };
+        }
+
+        /*
+         * Invoke API Service
+         */
+        [When(@"Currency Conversion API is Invoked for given data")]
+        public void WhenCurrencyConversionAPIIsInvokedForGivenData()
+        {
+            RestRequest restRequest = new RestRequest("/convert", Method.GET);
+            Response = RestClient.Execute(restRequest);
+        }
+
+        [When(@"When I invoke Service to convert given amount between two currencies")]
+        public void WhenPOSTAPIIsInvokedWithCurrencyData()
+        {
+            RestRequest request = new RestRequest("/convert/currency", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(CurrencyRequest);
+
+            Response = RestClient.Execute(request);
+        }
+
+        /*
+         * Verification
+        */
+        [Then(@"Verify that the response after conversion is valid")]
+        public void ThenVerifyThatTheResponseIsValid()
+        {
+            Assert.That(Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            Assert.That(Response.ContentType, Is.EqualTo("application/json"));
+            Assert.That(Response.Content.Contains("success"));
+        }
+
+        [Then(@"Verify that the responseCode is (.*)")]
+        public void ThenVerifyThatTheResponseCodeIs(HttpStatusCode responseStatus)
+        {
+            Assert.That(Response.StatusCode, Is.EqualTo(responseStatus));
         }
 
     }
