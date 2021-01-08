@@ -72,14 +72,16 @@ namespace SpecFlowCurrencyAPI.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies and decimal amount converts successfully", new string[] {
-                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmount"}, SourceLine=5)]
-        public virtual void ToVerifyThatGivenTwoCurrenciesAndDecimalAmountConvertsSuccessfully()
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies and amount without decimal point converts suc" +
+            "cessfully", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountWithoutDecimalPoint"}, SourceLine=5)]
+        public virtual void ToVerifyThatGivenTwoCurrenciesAndAmountWithoutDecimalPointConvertsSuccessfully()
         {
             string[] tagsOfScenario = new string[] {
-                    "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmount"};
+                    "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountWithoutDecimalPoint"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two currencies and decimal amount converts successfully", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two currencies and amount without decimal point converts suc" +
+                    "cessfully", null, tagsOfScenario, argumentsOfScenario);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -101,104 +103,36 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.Given("API Initialization for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have Initialized API Service call for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "from",
-                            "to",
-                            "amount"});
-                table1.AddRow(new string[] {
-                            "USD",
-                            "PKR",
-                            "16.98"});
-                table1.AddRow(new string[] {
-                            "EUR",
-                            "INR",
-                            "100.09"});
 #line 8
- testRunner.And("I have following data", ((string)(null)), table1, "And ");
+ testRunner.And("I want to convert 100.5 SEK to PKR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 12
- testRunner.When("Currency Conversion API is Invoked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
+ testRunner.When("Currency Conversion API is Invoked for given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 13
- testRunner.Then("the response code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies converts successfully", new string[] {
-                "VerifyThatGivenTwoCurrenciesAreConvertedOnGivenAmount"}, SourceLine=16)]
-        public virtual void ToVerifyThatGivenTwoCurrenciesConvertsSuccessfully()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "VerifyThatGivenTwoCurrenciesAreConvertedOnGivenAmount"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two currencies converts successfully", null, tagsOfScenario, argumentsOfScenario);
-#line 17
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 18
- testRunner.Given("API Initialization for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "from",
-                            "to",
-                            "amount"});
-                table2.AddRow(new string[] {
-                            "NOK",
-                            "PKR",
-                            "10.5"});
-                table2.AddRow(new string[] {
-                            "DKK",
-                            "SEK",
-                            "44.5"});
-#line 19
- testRunner.And("I have following data for POST Request", ((string)(null)), table2, "And ");
-#line hidden
-#line 23
- testRunner.When("POST API is invoked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 24
- testRunner.Then("the response code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+ testRunner.Then("Verify that the response after conversion is valid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        public virtual void VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline(string from, string to, string amount, string[] exampleTags)
+        public virtual void ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully(string amount, string fromCurrency, string toCurrency, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "TestPOSTReqestScenarioOutline"};
+                    "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountGETRequest"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("from", from);
-            argumentsOfScenario.Add("to", to);
             argumentsOfScenario.Add("amount", amount);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Currency Conversion POST API works fine Scenario Outline", null, tagsOfScenario, argumentsOfScenario);
-#line 28
+            argumentsOfScenario.Add("fromCurrency", fromCurrency);
+            argumentsOfScenario.Add("toCurrency", toCurrency);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two currencies and amount converts successfully", null, tagsOfScenario, argumentsOfScenario);
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -218,46 +152,316 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 29
- testRunner.Given("API Initialization for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 15
+ testRunner.Given("I have Initialized API Service call for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 30
- testRunner.And(string.Format("I have this data for POST Request {0}, {1} and {2}", from, to, amount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+ testRunner.And(string.Format("I want to convert {0} {1} to {2}", amount, fromCurrency, toCurrency), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 31
- testRunner.When("POST API is invoked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+ testRunner.When("Currency Conversion API is Invoked for given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 32
- testRunner.Then("the response code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 18
+ testRunner.Then("Verify that the response after conversion is valid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Verify Currency Conversion POST API works fine Scenario Outline, NOK", new string[] {
-                "TestPOSTReqestScenarioOutline"}, SourceLine=35)]
-        public virtual void VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline_NOK()
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies and amount converts successfully, 1587", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountGETRequest"}, SourceLine=20)]
+        public virtual void ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully_1587()
         {
-#line 28
-this.VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline("NOK", "PKR", "10.5", ((string[])(null)));
+#line 14
+this.ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully("1587", "USD", "PKR", ((string[])(null)));
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Verify Currency Conversion POST API works fine Scenario Outline, DKK", new string[] {
-                "TestPOSTReqestScenarioOutline"}, SourceLine=35)]
-        public virtual void VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline_DKK()
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies and amount converts successfully, 169000", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountGETRequest"}, SourceLine=20)]
+        public virtual void ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully_169000()
         {
-#line 28
-this.VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline("DKK", "SEK", "44.5", ((string[])(null)));
+#line 14
+this.ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully("169000", "NOK", "EUR", ((string[])(null)));
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Verify Currency Conversion POST API works fine Scenario Outline, PKR", new string[] {
-                "TestPOSTReqestScenarioOutline"}, SourceLine=35)]
-        public virtual void VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline_PKR()
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies and amount converts successfully, 89000", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountGETRequest"}, SourceLine=20)]
+        public virtual void ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully_89000()
         {
+#line 14
+this.ToVerifyThatGivenTwoCurrenciesAndAmountConvertsSuccessfully("89000", "NOK", "SEK", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully(string fromCurrency, string toCurrency, string amount, string responseStatus, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("fromCurrency", fromCurrency);
+            argumentsOfScenario.Add("toCurrency", toCurrency);
+            argumentsOfScenario.Add("amount", amount);
+            argumentsOfScenario.Add("responseStatus", responseStatus);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify Given two currencies and amount converts successfully", null, tagsOfScenario, argumentsOfScenario);
+#line 27
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
 #line 28
-this.VerifyCurrencyConversionPOSTAPIWorksFineScenarioOutline("PKR", "INR", "90.8", ((string[])(null)));
+ testRunner.Given("I have Initialized API Service call for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 29
+ testRunner.And(string.Format("I want to convert {0} {1} {2}", amount, fromCurrency, toCurrency), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.When("When I invoke Service to convert given amount between two currencies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 31
+ testRunner.Then(string.Format("Verify that the responseCode is {0}", responseStatus), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify Given two currencies and amount converts successfully, Variant 0", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"}, SourceLine=33)]
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully_Variant0()
+        {
+#line 27
+this.ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully("NOK", "PKR", "10.5", "OK", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify Given two currencies and amount converts successfully, Variant 1", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"}, SourceLine=33)]
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully_Variant1()
+        {
+#line 27
+this.ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully("DKK", "SEK", "44.5", "OK", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify Given two currencies and amount converts successfully, Variant 2", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"}, SourceLine=33)]
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully_Variant2()
+        {
+#line 27
+this.ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully("CCCZ", "SEK", "20.0", "BadRequest", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify Given two currencies and amount converts successfully, Variant 3", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"}, SourceLine=33)]
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully_Variant3()
+        {
+#line 27
+this.ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully("NOK", "BBCC", "22.7", "BadRequest", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify Given two currencies and amount converts successfully, Variant 4", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest"}, SourceLine=33)]
+        public virtual void ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully_Variant4()
+        {
+#line 27
+this.ToVerifyGivenTwoCurrenciesAndAmountConvertsSuccessfully("NOK", "INR", "0", "BadRequest", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two currencies converts successfully", new string[] {
+                "VerifyThatGivenTwoCurrenciesAreConvertedOnGivenAmount"}, SourceLine=41)]
+        public virtual void ToVerifyThatGivenTwoCurrenciesConvertsSuccessfully()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "VerifyThatGivenTwoCurrenciesAreConvertedOnGivenAmount"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two currencies converts successfully", null, tagsOfScenario, argumentsOfScenario);
+#line 42
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 43
+ testRunner.Given("I have Initialized API Service call for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "from",
+                            "to",
+                            "amount"});
+                table1.AddRow(new string[] {
+                            "NOK",
+                            "PKR",
+                            "10.5"});
+#line 44
+ testRunner.And("I wnat to current following currencies and amount", ((string)(null)), table1, "And ");
+#line hidden
+#line 47
+ testRunner.When("When I invoke Service to convert given amount between two currencies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 48
+ testRunner.Then("Verify that the responseCode is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        public virtual void ToVerifyThatGivenTwoInvalidCurrenciesThrowsError(string amount, string fromCurrency, string toCurrency, string responseStatus, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "VerifyThatGivenTwoInvalidCurrenciesThrowErrorInGETRequest"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("amount", amount);
+            argumentsOfScenario.Add("fromCurrency", fromCurrency);
+            argumentsOfScenario.Add("toCurrency", toCurrency);
+            argumentsOfScenario.Add("responseStatus", responseStatus);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that Given two Invalid currenciesThrows error", null, tagsOfScenario, argumentsOfScenario);
+#line 53
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+ testRunner.Given("I have Initialized API Service call for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 55
+ testRunner.And(string.Format("I want to convert {0} {1} to {2}", amount, fromCurrency, toCurrency), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 56
+ testRunner.When("Currency Conversion API is Invoked for given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 57
+ testRunner.Then(string.Format("Verify that the responseCode is {0}", responseStatus), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that Given two Invalid currenciesThrows error, 1587", new string[] {
+                "VerifyThatGivenTwoInvalidCurrenciesThrowErrorInGETRequest"}, SourceLine=59)]
+        public virtual void ToVerifyThatGivenTwoInvalidCurrenciesThrowsError_1587()
+        {
+#line 53
+this.ToVerifyThatGivenTwoInvalidCurrenciesThrowsError("1587", "Dummy", "AAA", "BadRequest", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void ToVerifyThatAnyRequestWithInvalidAPIKeyInHeaderWillThrow401UnAuthorizedErrorResposeFromServer(string amount, string fromCurrency, string toCurrency, string responseStatus, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "VerifyThatCallingCurrencyConversionAPIWithoutAPIKeyThrowsUNAUTHORIZEDErrorCode"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("amount", amount);
+            argumentsOfScenario.Add("fromCurrency", fromCurrency);
+            argumentsOfScenario.Add("toCurrency", toCurrency);
+            argumentsOfScenario.Add("responseStatus", responseStatus);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("To Verify that any request with invalid API key in header will throw 401 UnAuthor" +
+                    "ized Error respose from server", null, tagsOfScenario, argumentsOfScenario);
+#line 65
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 66
+ testRunner.Given("API Initialization without api key for fixer Currency Conversion API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 67
+ testRunner.And(string.Format("I want to convert {0} {1} to {2}", amount, fromCurrency, toCurrency), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 68
+ testRunner.When("Currency Conversion API is Invoked for given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 69
+ testRunner.Then(string.Format("Verify that the responseCode is {0}", responseStatus), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("To Verify that any request with invalid API key in header will throw 401 UnAuthor" +
+            "ized Error respose from server, 1587", new string[] {
+                "VerifyThatCallingCurrencyConversionAPIWithoutAPIKeyThrowsUNAUTHORIZEDErrorCode"}, SourceLine=72)]
+        public virtual void ToVerifyThatAnyRequestWithInvalidAPIKeyInHeaderWillThrow401UnAuthorizedErrorResposeFromServer_1587()
+        {
+#line 65
+this.ToVerifyThatAnyRequestWithInvalidAPIKeyInHeaderWillThrow401UnAuthorizedErrorResposeFromServer("1587", "NOK", "AED", "Unauthorized", ((string[])(null)));
 #line hidden
         }
     }
