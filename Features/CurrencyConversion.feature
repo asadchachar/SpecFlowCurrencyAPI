@@ -2,8 +2,8 @@
 	In order to verify currency API works fine
 	We want to input *toCurrency*, *fromCurrency* and *amount* to be converted 
 
-@VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountWithoutDecimalPoint
-Scenario: To Verify that Given two currencies and amount without decimal point converts successfully 
+@VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenCurrencyAmount
+Scenario: To Verify that Given two currencies and amount converts successfully 
 	Given I have Initialized API Service call for fixer Currency Conversion API
 	And I want to convert 100.5 SEK to PKR
 	When Currency Conversion API is Invoked for given data
@@ -11,7 +11,7 @@ Scenario: To Verify that Given two currencies and amount without decimal point c
 
 
 @VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountGETRequest
-Scenario Outline: To Verify that Given two currencies and amount converts successfully 
+Scenario Outline: To Verify that Given two currencies and amount converts successfully with data from fixer
 	Given I have Initialized API Service call for fixer Currency Conversion API
 	And I want to convert <amount> <fromCurrency> to <toCurrency>
 	When Currency Conversion API is Invoked for given data
@@ -21,7 +21,6 @@ Scenario Outline: To Verify that Given two currencies and amount converts succes
 		| 1587   | USD          | PKR        |
 		| 169000 | NOK			| EUR        |
 		| 89000  | NOK			| SEK		 |
-
 
 @VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountPOSTRequest
 Scenario Outline: To Verify Given two currencies and amount converts successfully 
@@ -46,6 +45,14 @@ Scenario: To Verify that Given two currencies converts successfully
 		|	NOK		|	PKR	|	10.5	|
 	When When I invoke Service to convert given amount between two currencies
 	Then Verify that the responseCode is OK
+
+@VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountAndCurrenciesAmountCore
+Scenario: To Verify that Given two currencies and amount are exchanged successfully 
+	Given I have Initialized API Service call for fixer Currency Conversion APIs
+	And I want to convert 100.5 SEK PKR
+	When I call Currency Conversion API on above given data
+	Then Verify that the response after conversion contains success as true
+	And Verify that response after conversion contains valid converted result
 
 
 ## Some Negative Scenarios

@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
 using RestSharp;
+using SpecFlowCurrencyAPI.API;
 using SpecFlowCurrencyAPI.Config;
 using SpecFlowCurrencyAPI.Model;
 using System;
 using System.Collections;
 using System.Net;
+using System.Net.Http;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -17,6 +19,10 @@ namespace SpecFlowCurrencyAPI.Steps
         private IRestResponse Response;
         private CurrencyRequest CurrencyRequest;
 
+        private HttpClient HttpClient;
+        private HttpResponseMessage ResponseMessage;
+
+        private APIAdapter APIAdapter = new APIAdapter();
         /*
          * API Initialization
          */
@@ -32,6 +38,15 @@ namespace SpecFlowCurrencyAPI.Steps
             RestClient = new RestClient(APIConfig.BaseUrl);
             //Note that this time we are skipping api key for authorization 
         }
+
+        [Given(@"I have Initialized API Service call for fixer Currency Conversion APIs")]
+        public void GivenIHaveInitializedAPIServiceCallForFixerCurrencyConversionAPIViaCoreHTTPClient()
+        {
+            HttpClient = new HttpClient();
+            HttpClient.BaseAddress = new Uri(APIConfig.BaseUrl);
+            HttpClient.DefaultRequestHeaders.Add("api-key", APIConfig.ApiKey);
+        }
+
 
         /*
          * Request paramter Initializations 
@@ -70,18 +85,19 @@ namespace SpecFlowCurrencyAPI.Steps
         [When(@"Currency Conversion API is Invoked for given data")]
         public void WhenCurrencyConversionAPIIsInvokedForGivenData()
         {
-            RestRequest restRequest = new RestRequest("/convert", Method.GET);
-            Response = RestClient.Execute(restRequest);
+            Response = APIAdapter.callCurrencyConversionGETAPI(RestClient);
         }
 
         [When(@"When I invoke Service to convert given amount between two currencies")]
         public void WhenPOSTAPIIsInvokedWithCurrencyData()
         {
-            RestRequest request = new RestRequest("/convert/currency", Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(CurrencyRequest);
+            Response = APIAdapter.callCurrencyConversionPOSTAPI(RestClient, CurrencyRequest);
+        }
 
-            Response = RestClient.Execute(request);
+        [When(@"I call Currency Conversion API on above given data")]
+        public async System.Threading.Tasks.Task WhenICallCurrencyConversionAPIOnAboveGivenDataAsync()
+        {
+            ResponseMessage = await APIAdapter.callCurrencyConversionGETAPI(HttpClient, CurrencyRequest);
         }
 
         /*
@@ -100,6 +116,22 @@ namespace SpecFlowCurrencyAPI.Steps
         {
             Assert.That(Response.StatusCode, Is.EqualTo(responseStatus));
         }
+
+        [Then(@"Verify that the response after conversion contains success as (.*)")]
+        public async System.Threading.Tasks.Task ThenVerifyThatTheResponseAfterConversionContainsSuccessAsTrueAsync(Boolean SuccessFlag)
+        {
+            CurrencyResponse res = await ResponseMessage.Content.ReadAsAsync<CurrencyResponse>();
+            Assert.That(res.success, Is.EqualTo(SuccessFlag));
+        }
+
+        [Then(@"Verify that response after conversion contains valid converted result")]
+        public async void ThenVerifyThatResponseAfterConversionContainsValidConvertedResult()
+        {
+            CurrencyResponse res = await ResponseMessage.Content.ReadAsAsync<CurrencyResponse>();
+            Assert.That(res.rate, Is.Not.Null);
+            Assert.That(res.convertResult, Is.Not.Null);
+        }
+
 
     }
 }
