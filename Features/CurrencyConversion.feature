@@ -46,16 +46,7 @@ Scenario: To Verify that Given two currencies converts successfully
 	When When I invoke Service to convert given amount between two currencies
 	Then Verify that the responseCode is OK
 
-@VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountAndCurrenciesAmountCore
-Scenario: To Verify that Given two currencies and amount are exchanged successfully 
-	Given I have Initialized API Service call for fixer Currency Conversion APIs
-	And I want to convert 100.5 SEK PKR
-	When I call Currency Conversion API on above given data
-	Then Verify that the response after conversion contains success as true
-	And Verify that response after conversion contains valid converted result
-
-
-## Some Negative Scenarios
+# Some Negative Scenarios
 @VerifyThatGivenTwoInvalidCurrenciesThrowErrorInGETRequest
 Scenario Outline: To Verify that Given two Invalid currenciesThrows error 
 	Given I have Initialized API Service call for fixer Currency Conversion API
@@ -79,3 +70,11 @@ Scenario Outline: To Verify that any request with invalid API key in header will
 		| amount | fromCurrency | toCurrency | responseStatus |
 		| 1587   | NOK			| AED        | Unauthorized   |
 
+#using HttpClient
+@VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenAmountAndCurrenciesAmountCore
+Scenario: To Verify that Given two currencies and amount are exchanged successfully 
+	Given I have Initialized API Service call for fixer Currency Conversion APIs
+	And I want to convert 100.5 SEK PKR
+	When I call Currency Conversion API on above given data
+	Then Verify that the response after conversion contains success as true
+	And Verify that response after conversion contains valid converted result

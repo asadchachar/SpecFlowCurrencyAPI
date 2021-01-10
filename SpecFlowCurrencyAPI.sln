@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowCurrencyAPI", "SpecFlowCurrencyAPI.csproj", "{0DBB648D-1F23-438B-A7B2-D9F035DDE430}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestHttpClient", "..\..\..\..\..\Users\vr40\source\repos\RestHttpClient\RestHttpClient\RestHttpClient.csproj", "{B2222839-D9FD-44E2-BA22-F4550C86CFBE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{0DBB648D-1F23-438B-A7B2-D9F035DDE430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DBB648D-1F23-438B-A7B2-D9F035DDE430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DBB648D-1F23-438B-A7B2-D9F035DDE430}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2222839-D9FD-44E2-BA22-F4550C86CFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2222839-D9FD-44E2-BA22-F4550C86CFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2222839-D9FD-44E2-BA22-F4550C86CFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2222839-D9FD-44E2-BA22-F4550C86CFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
