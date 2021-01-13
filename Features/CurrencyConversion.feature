@@ -5,7 +5,7 @@
 @VerifyThatGivenTwoCurrenciesAreConvertedAsPerGivenCurrencyAmount
 Scenario: To Verify that Given two currencies and amount converts successfully 
 	Given I have Initialized API Service call for fixer Currency Conversion API
-	And I want to convert 100.5 SEK to PKR
+	And I want to convert 100.5 SEK to NOK
 	When Currency Conversion API is Invoked for given data
 	Then Verify that the response after conversion is valid
 
@@ -78,3 +78,13 @@ Scenario: To Verify that Given two currencies and amount are exchanged successfu
 	When I call Currency Conversion API on above given data
 	Then Verify that the response after conversion contains success as true
 	And Verify that response after conversion contains valid converted result
+
+@VerifyThatGivenTwoCurrenciesAreConvertedIntoGivenAmountPOSTRequest
+Scenario Outline: To Verify Given two currencies amount converts successfully 
+	Given I have Initialized API Service call for fixer Currency Conversion APIs
+	And I want to convert <amount> <fromCurrency> <toCurrency>
+	When I Convert above given currencies data
+	Then Verify that the response after conversion contains success as true
+	Examples: 
+		| fromCurrency	| toCurrency	| amount	| responseStatus |
+		| NOK			| PKR			| 10.5		| OK             |

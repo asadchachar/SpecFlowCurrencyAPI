@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿
+using NUnit.Framework;
 using RestSharp;
 using SpecFlowCurrencyAPI.API;
 using SpecFlowCurrencyAPI.Config;
@@ -23,9 +24,8 @@ namespace SpecFlowCurrencyAPI.Steps
         private HttpResponseMessage ResponseMessage;
 
         private APIAdapter APIAdapter = new APIAdapter();
-        /*
-         * API Initialization
-         */
+
+        //API Initialization
         [Given(@"I have Initialized API Service call for fixer Currency Conversion API")]
         public void GivenIHaveFixerAPI()
         {
@@ -47,10 +47,7 @@ namespace SpecFlowCurrencyAPI.Steps
             HttpClient.DefaultRequestHeaders.Add("api-key", APIConfig.ApiKey);
         }
 
-
-        /*
-         * Request paramter Initializations 
-         */
+        
         [Given(@"I wnat to current following currencies and amount")]
         public void GivenIHaveFollowingDataForPOST(Table table)
         {
@@ -100,9 +97,14 @@ namespace SpecFlowCurrencyAPI.Steps
             ResponseMessage = await APIAdapter.callCurrencyConversionGETAPI(HttpClient, CurrencyRequest);
         }
 
-        /*
-         * Verification
-        */
+        [When(@"I Convert above given currencies data")]
+        public async System.Threading.Tasks.Task WhenIConvertAboveGivenCurrenciesDataAsync()
+        {
+            ResponseMessage = await APIAdapter.callCurrencyConversionsPOSTAPI(HttpClient, CurrencyRequest);
+        }
+
+
+        // Verification
         [Then(@"Verify that the response after conversion is valid")]
         public void ThenVerifyThatTheResponseIsValid()
         {
