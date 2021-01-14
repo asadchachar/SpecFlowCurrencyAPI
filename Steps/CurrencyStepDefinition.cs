@@ -109,7 +109,7 @@ namespace SpecFlowCurrencyAPI.Steps
         public void ThenVerifyThatTheResponseIsValid()
         {
             Assert.That(Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-            Assert.That(Response.ContentType, Is.EqualTo("application/json"));
+            Assert.That(Response.ContentType, Is.EqualTo("application/json").Or.EqualTo("application/json; charset=utf-8"));
             Assert.That(Response.Content.Contains("success"));
         }
 

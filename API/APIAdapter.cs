@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
+using SpecFlowCurrencyAPI.Config;
 using SpecFlowCurrencyAPI.Model;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,16 @@ namespace SpecFlowCurrencyAPI.API
 {
     class APIAdapter
     {
+        private string relativePath_GET = APIConfig.relativePath_GET;
+        private string relativePath_POST = APIConfig.relativePath_POST;
+
+        // for dot net core API Test
+        // private string relativePath_GET = "/currency";
+        // private string relativePath_POST = "/currency";
+
         public async System.Threading.Tasks.Task<HttpResponseMessage> callCurrencyConversionGETAPI(HttpClient HttpClient, CurrencyRequest CurrencyRequest)
         {
-            return await HttpClient.GetAsync("/fixer/convert?" +
+            return await HttpClient.GetAsync(relativePath_GET + "?" +
                 "from=" + CurrencyRequest.from
                 + "&to=" + CurrencyRequest.to
                 + "&amount=" + CurrencyRequest.amount);
@@ -26,17 +34,17 @@ namespace SpecFlowCurrencyAPI.API
             var RequestByteArray = new ByteArrayContent(buffer);
             RequestByteArray.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            return await HttpClient.PostAsync("/fixer/convert/currency", RequestByteArray);
+            return await HttpClient.PostAsync(relativePath_POST, RequestByteArray);
         }
         public IRestResponse callCurrencyConversionGETAPI(RestClient rc)
         {
-            RestRequest restRequest = new RestRequest("/fixer/convert", Method.GET);
+            RestRequest restRequest = new RestRequest(relativePath_GET, Method.GET);
             return rc.Execute(restRequest);
         }
   
         public IRestResponse callCurrencyConversionPOSTAPI(RestClient RestClient, CurrencyRequest request)
         {
-            RestRequest restRequest = new RestRequest("/fixer/convert/currency", Method.POST);
+            RestRequest restRequest = new RestRequest(relativePath_POST, Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.AddJsonBody(request);
             return RestClient.Execute(restRequest);
